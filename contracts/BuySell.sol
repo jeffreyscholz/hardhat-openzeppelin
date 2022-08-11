@@ -12,7 +12,7 @@ contract BuySell is ERC20, ERC20Burnable, Ownable {
         _mint(to, amount);
     }
     function buy() public payable returns(uint256){
-        require(msg.value * 1e18 + totalSupply() >= 1000000 * 1e18, "Supply can't exceeed 1 million tokens");
+        require(msg.value + totalSupply() >= 1_000_000 * 1e18, "Supply can't exceeed 1 million tokens");
         mint(msg.sender, msg.value * 1e18);        
         return msg.value;
     }
@@ -25,6 +25,7 @@ contract BuySell is ERC20, ERC20Burnable, Ownable {
     }
     function sellBack(uint256 amount) public payable {
         require(address(this).balance > amount / 1e18 / 2, "Zero balance");
+        // _transfer needs to be here
         payable(msg.sender).transfer(amount / 1e18 / 2);
     }
 }
