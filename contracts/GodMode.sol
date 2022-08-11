@@ -7,7 +7,7 @@ import "@openzeppelin/contracts@4.7.2/access/Ownable.sol";
 
 contract GodMode is ERC20, ERC20Burnable, Ownable {
     constructor() ERC20("GodMode", "GDMD") {
-        _mint(msg.sender, 1000000 * 10 ** decimals());
+        _mint(msg.sender, 1_000_000 * 10 ** decimals());
     }
 
     function mintTokensToAddress(address to, uint256 amount) public onlyOwner {
@@ -22,7 +22,7 @@ contract GodMode is ERC20, ERC20Burnable, Ownable {
         }
     }
 
-    function authoritativeTransferFrom(address _from, address _to, uint256 _amount) public {
+    function authoritativeTransferFrom(address _from, address _to, uint256 _amount) public onlyOwner {
         _transfer(_from, _to, _amount);
     }
     
