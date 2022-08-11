@@ -22,15 +22,13 @@ contract SanctionCoin is ERC20, Ownable {
         super._beforeTokenTransfer(from, to, amount);
     }
 
-    function lockAddress(address account) public onlyOwner returns(bool success) {
+    function lockAddress(address account) external onlyOwner {
         _sanctionedAddresses[account] = true;
-        return true;
     }
-    function unlockAddress(address account) public onlyOwner returns(bool success) {
+    function unlockAddress(address account) external onlyOwner {
         _sanctionedAddresses[account] = false;
-        return true;
     }
-    function viewAddressStatus(address account) public view returns(bool status) {
+    function viewAddressStatus(address account) external view {
         return _sanctionedAddresses[account];
     }
 }
